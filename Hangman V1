@@ -1,0 +1,13 @@
+import random 
+
+words = ['banana', 'apple', 'orange', 'strawberry', 'mango', 'pineapple']
+word = random.choice(words)
+blanks = []
+def add_blanks(word, blanks):
+    for char in word:
+        blanks.append('__')
+    return blanks
+add_blanks(word, blanks)
+print ('Welcome to Hangman, guess the word!')
+print (blanks)
+
