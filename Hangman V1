@@ -1,13 +1,47 @@
 import random 
+import numpy as np
 
 words = ['banana', 'apple', 'orange', 'strawberry', 'mango', 'pineapple']
 word = random.choice(words)
 blanks = []
-def add_blanks(word, blanks):
+true_word = []
+def add_blanks(word, blanks, true_word):
     for char in word:
         blanks.append('__')
+        true_word.append(char)
     return blanks
-add_blanks(word, blanks)
+    return true_word
+add_blanks(word, blanks, true_word)
 print ('Welcome to Hangman, guess the word!')
 print (blanks)
+print (true_word)
+guesses = 3
 
+win = 0
+
+while guesses > 0 or win == 1:
+  guess = input("Guess a letter:")
+  values = np.array(true_word)
+  correct_guesses = np.where(values == guess)[0]
+  num_guesses = 0
+  for term in correct_guesses:
+    blanks[term] = guess
+    num_guesses += 1
+  print (blanks)
+  if num_guesses == 0:
+    guesses -= 1
+  else:
+    num_guesses = 0
+  blank = '__'
+  num_blanks = 0
+  val = np.array(blanks)
+  rem_blanks = np.where(val == blank)[0]
+  for term in rem_blanks:
+    num_blanks += 1
+  if num_blanks == 0:
+    win == 0
+
+if guesses == 0 and win == 0:
+  print ("You lose! Press Run to try again.")
+elif win == 1:
+  print ("You win!")
