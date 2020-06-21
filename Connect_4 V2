@@ -1,0 +1,132 @@
+print ('Welcom to Connect 4!')
+
+board = []
+
+for x in range(0, 6):
+    board.append(["O"] * 7)
+
+def print_board(board):
+    for row in board:
+        print(row)
+
+print_board(board)
+
+col_0 = 5
+col_1 = 5
+col_2 = 5
+col_3 = 5
+col_4 = 5
+col_5 = 5
+col_6 = 5
+
+
+def player_1(print_board):
+  move = int(input("Player 1 turn, drop your chip in a column (count normally, not python-style!):")) - 1
+  global board
+  global col_0
+  global col_1
+  global col_2
+  global col_3
+  global col_4
+  global col_5
+  global col_6
+  if move < 7 and move > -1:
+    if move == 0 and col_0 > -1:
+      board[col_0][move] = 'X'
+      print_board(board)
+      col_0 -= 1
+      return col_0
+    elif move == 1 and col_1 > -1:
+      board[col_1][move] = 'X'
+      print_board(board)
+      col_1 -= 1
+      return col_1
+    elif move == 2 and col_2 > -1:
+      board[col_2][move] = 'X'
+      print_board(board)
+      col_2 -= 1
+      return col_2
+    elif move == 3 and col_3 > -1:
+      board[col_3][move] = 'X'
+      print_board(board)
+      col_3 -= 1
+      return col_3
+    elif move == 4 and col_4 > -1:
+      board[col_4][move] = 'X'
+      print_board(board)
+      col_4 -= 1
+      return col_4
+    elif move == 5 and col_5 > -1:
+      board[col_5][move] = 'X'
+      print_board(board)
+      col_5 -= 1
+      return col_5
+    elif move == 6 and col_6 > -1:
+      board[col_6][move] = 'X'
+      print_board(board)
+      col_6 -= 1
+      return col_6
+    else:
+      print ("That column was full! Try again.")
+      player_1(print_board)
+  else:
+    print ("That column isn't on the board! Try again.")
+    player_1(print_board)
+
+def player_2(print_board):
+  move = int(input("Player 2 turn, drop your chip in a column (count normally, not python-style!):")) - 1
+  global board
+  global col_0
+  global col_1
+  global col_2
+  global col_3
+  global col_4
+  global col_5
+  global col_6
+  if move < 7 and move > -1:
+    if move == 0 and col_0 > -1:
+      board[col_0][move] = '+'
+      print_board(board)
+      col_0 -= 1
+      return col_0
+    elif move == 1 and col_1 > -1:
+      board[col_1][move] = '+'
+      print_board(board)
+      col_1 -= 1
+      return col_1
+    elif move == 2 and col_2 > -1:
+      board[col_2][move] = '+'
+      print_board(board)
+      col_2 -= 1
+      return col_2
+    elif move == 3 and col_3 > -1:
+      board[col_3][move] = '+'
+      print_board(board)
+      col_3 -= 1
+      return col_3
+    elif move == 4 and col_4 > -1:
+      board[col_4][move] = '+'
+      print_board(board)
+      col_4 -= 1
+      return col_4
+    elif move == 5 and col_5 > -1:
+      board[col_5][move] = '+'
+      print_board(board)
+      col_5 -= 1
+      return col_5
+    elif move == 6 and col_6 > -1:
+      board[col_6][move] = '+'
+      print_board(board)
+      col_6 -= 1
+      return col_6
+    else:
+      print ("That column was full! Try again.")
+      player_2(print_board)
+  else:
+    print ("That column isn't on the board! Try again.")
+    player_2(print_board)
+
+win_condition = 0
+while win_condition == 0:
+  player_1(print_board)
+  player_2(print_board)
