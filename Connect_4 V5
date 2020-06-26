@@ -1,0 +1,681 @@
+from colorama import init
+init(autoreset=True)
+from colorama import Fore, Back, Style
+
+print ('Welcome to Connect 4!')
+
+board = []
+
+for x in range(0, 6):
+    board.append(["O"] * 7)
+
+def print_board(board):
+  global font_40
+  for row in board:
+    newRow = " ".join(row)
+    print (Back.GREEN + Fore.BLACK + Style.BRIGHT + " " + newRow + " ")
+
+
+print_board(board)
+
+col_0 = 5
+col_1 = 5
+col_2 = 5
+col_3 = 5
+col_4 = 5
+col_5 = 5
+col_6 = 5
+
+win_condition = 0
+
+def player_1(print_board):
+  move = int(input("Player 1 turn, drop your chip in a column (count normally, not python-style!):")) - 1
+  global board
+  global col_0
+  global col_1
+  global col_2
+  global col_3
+  global col_4
+  global col_5
+  global col_6
+  if move < 7 and move > -1:
+    if move == 0 and col_0 > -1:
+      board[col_0][move] = 'X'
+      print_board(board)
+      col_0 -= 1
+      return col_0
+    elif move == 1 and col_1 > -1:
+      board[col_1][move] = 'X'
+      print_board(board)
+      col_1 -= 1
+      return col_1
+    elif move == 2 and col_2 > -1:
+      board[col_2][move] = 'X'
+      print_board(board)
+      col_2 -= 1
+      return col_2
+    elif move == 3 and col_3 > -1:
+      board[col_3][move] = 'X'
+      print_board(board)
+      col_3 -= 1
+      return col_3
+    elif move == 4 and col_4 > -1:
+      board[col_4][move] = 'X'
+      print_board(board)
+      col_4 -= 1
+      return col_4
+    elif move == 5 and col_5 > -1:
+      board[col_5][move] = 'X'
+      print_board(board)
+      col_5 -= 1
+      return col_5
+    elif move == 6 and col_6 > -1:
+      board[col_6][move] = 'X'
+      print_board(board)
+      col_6 -= 1
+      return col_6
+    else:
+      print ("That column was full! Try again.")
+      player_1(print_board)
+  else:
+    print ("That column isn't on the board! Try again.")
+    player_1(print_board)
+
+def player_2(print_board):
+  move = int(input("Player 2 turn, drop your chip in a column (count normally, not python-style!):")) - 1
+  global board
+  global col_0
+  global col_1
+  global col_2
+  global col_3
+  global col_4
+  global col_5
+  global col_6
+  if move < 7 and move > -1:
+    if move == 0 and col_0 > -1:
+      board[col_0][move] = '+'
+      print_board(board)
+      col_0 -= 1
+      return col_0
+    elif move == 1 and col_1 > -1:
+      board[col_1][move] = '+'
+      print_board(board)
+      col_1 -= 1
+      return col_1
+    elif move == 2 and col_2 > -1:
+      board[col_2][move] = '+'
+      print_board(board)
+      col_2 -= 1
+      return col_2
+    elif move == 3 and col_3 > -1:
+      board[col_3][move] = '+'
+      print_board(board)
+      col_3 -= 1
+      return col_3
+    elif move == 4 and col_4 > -1:
+      board[col_4][move] = '+'
+      print_board(board)
+      col_4 -= 1
+      return col_4
+    elif move == 5 and col_5 > -1:
+      board[col_5][move] = '+'
+      print_board(board)
+      col_5 -= 1
+      return col_5
+    elif move == 6 and col_6 > -1:
+      board[col_6][move] = '+'
+      print_board(board)
+      col_6 -= 1
+      return col_6
+    else:
+      print ("That column was full! Try again.")
+      player_2(print_board)
+  else:
+    print ("That column isn't on the board! Try again.")
+    player_2(print_board)
+
+winner = 0
+
+def win_announce():
+  global winner
+  if winner == 1:
+    print (Style.RESET_ALL + "Player 1 wins!")
+  elif winner == 2:
+    print (Style.RESET_ALL + "Player 2 wins!")
+
+def check_row(player):
+  global win_condition
+  global board
+  for row in board:
+    win_checker = 0
+    for element in row:
+      if element == player:
+        win_checker += 1
+      else: 
+        win_checker = 0
+      if win_checker >= 4:
+        win_condition = 1
+        break
+
+def check_col(player):
+  global win_condition
+  global board
+  for i in range(7):
+    win_checker = 0
+    if board[0][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+    if board[1][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+    if board[2][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+    if board[3][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+    if board[4][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+    if board[5][i] == player: 
+      win_checker += 1
+      if win_checker >= 4:
+        win_condition = 1
+        break
+    else:
+      win_checker = 0
+
+def diag1(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[0][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[5][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag2(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[0][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[5][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag3(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[0][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag4(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[0][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag5(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[1][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[5][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag6(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[2][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[5][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag7(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[5][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[0][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  
+def diag8(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[5][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[0][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag9(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[5][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag10(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[5][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[4][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][5] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][6] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag11(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[4][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[3][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[0][4] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def diag12(player):
+  global board
+  global win_condition
+  win_checker = 0
+  if board[3][0] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[2][1] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[1][2] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+  if board[0][3] == player:
+    win_checker += 1
+    if win_checker >= 4:
+        win_condition = 1
+  else:
+    win_checker = 0
+
+def player_1_win():
+  global win_condition
+  global winner
+  global board
+  check_row('X')
+  check_col('X')
+  diag1('X')
+  diag2('X')
+  diag3('X')
+  diag4('X')
+  diag5('X')
+  diag6('X')
+  diag7('X')
+  diag8('X')
+  diag9('X')
+  diag10('X')
+  diag11('X')
+  diag12('X')
+  if win_condition == 1:
+    winner = 1
+
+def player_2_win():
+  global win_condition
+  global winner
+  global board
+  check_row('+')
+  check_col('+')
+  diag1('+')
+  diag2('+')
+  diag3('+')
+  diag4('+')
+  diag5('+')
+  diag6('+')
+  diag7('+')
+  diag8('+')
+  diag9('+')
+  diag10('+')
+  diag11('+')
+  diag12('+')
+  if win_condition == 1:
+    winner = 2
+
+while win_condition == 0:
+  player_1(print_board)
+  player_1_win()
+  if win_condition == 1:
+    break
+  player_2(print_board)
+  player_2_win()
+  if win_condition == 1:
+    break
+
+if win_condition == 1:
+  win_announce()
